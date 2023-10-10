@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-deployment
+  labels:
+    app: spring_app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring_app
+  template:
+    metadata:
+      labels:
+        app: spring_app
+    spec:
+      containers:
+        - name: spring
+          image: devopsmydockerhub/spring_app:v1
+          ports:
+            - containerPort: 8080  
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /etc/config/secret
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: my-secret
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: spring_app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: 30007
+  type: NodePort
