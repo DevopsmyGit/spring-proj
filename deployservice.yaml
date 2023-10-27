@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: spring
-          image: devopsmydockerhub/spring-test
+          image: devopsmydockerhub/spring-k8s
           ports:
             - containerPort: 8082
           volumeMounts:
