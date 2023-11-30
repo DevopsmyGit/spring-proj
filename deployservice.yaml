@@ -39,6 +39,7 @@ spec:
     app: spring_app
   ports:
     - protocol: TCP
-      port: 30007
+      port: 80
       targetPort: 8082
+      nodePort : 30007
   type: NodePort
