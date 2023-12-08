@@ -56,5 +56,15 @@ pipeline {
                 sh 'docker push devopsmydockerhub/spring-proj:spring-k8s'
             }
         }
+
+        stage('Deploy to kubernets'){
+            steps{
+                script{
+                    withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s-config', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
+                       sh 'kubectl apply -f deployservice.yaml'
+                  }
+                }
+            }
+        }
     }
 }
