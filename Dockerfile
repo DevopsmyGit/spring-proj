@@ -2,7 +2,6 @@
 FROM maven:3.8.4-openjdk-11 AS builder
 WORKDIR /app
 COPY pom.xml .
-RUN mvn dependency:go-offline
 COPY src /app/src
 RUN mvn compile && mvn clean package
 
