@@ -4,7 +4,7 @@ WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline
 COPY src /app/src
-RUN mvn clean package
+RUN mvn compile && mvn clean package
 
 # Stage 2: Create the final image with only the JRE and the compiled application
 FROM openjdk:11-jre-slim
